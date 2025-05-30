@@ -1,0 +1,6 @@
+@ResumeFilterApi_HostAddress = http://localhost:5182
+
+GET {{ResumeFilterApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
