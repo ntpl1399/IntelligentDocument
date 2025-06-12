@@ -20,7 +20,7 @@ public class DocumentIntelligenceService : IDocumentIntelligenceService
 
     public async Task<ResumeDocument> ExtractResumeInsightsAsync(string blobUrl)
     {
-        string? sasToken = "sp=r&st=2025-06-11T02:15:37Z&se=2025-06-30T10:15:37Z&spr=https&sv=2024-11-04&sr=c&sig=vLuLeuZJIV8XXdapSQqShQtUbhUznMsJ9X3jx9hLeDQ%3D";
+        string? sasToken = "post ur sas token here";
         // Append SAS token if provided and not already present
         if (!string.IsNullOrWhiteSpace(sasToken) && !blobUrl.Contains("sig="))
         {
