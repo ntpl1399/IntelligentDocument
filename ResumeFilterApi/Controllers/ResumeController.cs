@@ -37,4 +37,6 @@ public class ResumeController : ControllerBase
 
         return Ok(new { message = "Resume processed successfully", blobUrl });
     }
+
+
 }

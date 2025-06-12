@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ResumeFilterApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+538093efb20911c6138b639d44ea5aa5dfd16fa0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a294e08df376de0e77e080b3c9e2d3077f55a2b9")]
 [assembly: System.Reflection.AssemblyProductAttribute("ResumeFilterApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ResumeFilterApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,12 +1,1 @@
-{
-  "Version": 1,
-  "Hash": "dkmgKPelG7q5QrA+EDmlXFsMx5TdYFlloWodaIPDAX4=",
-  "Source": "ResumeFilterApi",
-  "BasePath": "_content/ResumeFilterApi",
-  "Mode": "Default",
-  "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": [],
-  "Endpoints": []
-}
+{"Version":1,"Hash":"dkmgKPelG7q5QrA+EDmlXFsMx5TdYFlloWodaIPDAX4=","Source":"ResumeFilterApi","BasePath":"_content/ResumeFilterApi","Mode":"Default","ManifestType":"Build","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[],"Assets":[],"Endpoints":[]}

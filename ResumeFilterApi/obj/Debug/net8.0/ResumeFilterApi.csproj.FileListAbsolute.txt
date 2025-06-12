@@ -76,12 +76,6 @@ C:\Users\Manikrishna.Satti\Source\Repos\IntelligentDocument\ResumeFilterApi\obj\
 C:\Users\Manikrishna.Satti\Source\Repos\IntelligentDocument\ResumeFilterApi\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\Manikrishna.Satti\Source\Repos\IntelligentDocument\ResumeFilterApi\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\Manikrishna.Satti\Source\Repos\IntelligentDocument\ResumeFilterApi\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-C:\Users\Manikrishna.Satti\Source\Repos\IntelligentDocument\ResumeFilterApi\obj\Debug\net8.0\staticwebassets\msbuild.ResumeFilterApi.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Users\Manikrishna.Satti\Source\Repos\IntelligentDocument\ResumeFilterApi\obj\Debug\net8.0\staticwebassets\msbuild.ResumeFilterApi.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
-C:\Users\Manikrishna.Satti\Source\Repos\IntelligentDocument\ResumeFilterApi\obj\Debug\net8.0\staticwebassets\msbuild.build.ResumeFilterApi.props
-C:\Users\Manikrishna.Satti\Source\Repos\IntelligentDocument\ResumeFilterApi\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.ResumeFilterApi.props
-C:\Users\Manikrishna.Satti\Source\Repos\IntelligentDocument\ResumeFilterApi\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.ResumeFilterApi.props
-C:\Users\Manikrishna.Satti\Source\Repos\IntelligentDocument\ResumeFilterApi\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Users\Manikrishna.Satti\Source\Repos\IntelligentDocument\ResumeFilterApi\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\Manikrishna.Satti\Source\Repos\IntelligentDocument\ResumeFilterApi\obj\Debug\net8.0\ResumeFi.7C2E2D68.Up2Date
 C:\Users\Manikrishna.Satti\Source\Repos\IntelligentDocument\ResumeFilterApi\obj\Debug\net8.0\ResumeFilterApi.dll
@@ -89,3 +83,4 @@ C:\Users\Manikrishna.Satti\Source\Repos\IntelligentDocument\ResumeFilterApi\obj\
 C:\Users\Manikrishna.Satti\Source\Repos\IntelligentDocument\ResumeFilterApi\obj\Debug\net8.0\ResumeFilterApi.pdb
 C:\Users\Manikrishna.Satti\Source\Repos\IntelligentDocument\ResumeFilterApi\obj\Debug\net8.0\ResumeFilterApi.genruntimeconfig.cache
 C:\Users\Manikrishna.Satti\Source\Repos\IntelligentDocument\ResumeFilterApi\obj\Debug\net8.0\ref\ResumeFilterApi.dll
+C:\Users\Manikrishna.Satti\Source\Repos\IntelligentDocument\ResumeFilterApi\obj\Debug\net8.0\staticwebassets.build.json.cache
