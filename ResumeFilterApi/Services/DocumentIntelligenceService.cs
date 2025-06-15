@@ -1,15 +1,21 @@
-﻿using Azure.AI.FormRecognizer.DocumentAnalysis;
-using Azure;
+﻿using Azure;
+using Azure.AI.FormRecognizer.DocumentAnalysis;
+using Microsoft.AspNetCore.DataProtection.KeyManagement;
 
 public class DocumentIntelligenceService : IDocumentIntelligenceService
 {
     private readonly DocumentAnalysisClient _client;
 
+    private readonly DocumentModelAdministrationClient _client1;
+
     public DocumentIntelligenceService(IConfiguration config)
     {
         var endpoint = new Uri(config["DocumentIntelligence:Endpoint"]);
         var key = new AzureKeyCredential(config["DocumentIntelligence:ApiKey"]);
+
+        // Initialize the correct client types
         _client = new DocumentAnalysisClient(endpoint, key);
+        _client1 = new DocumentModelAdministrationClient(endpoint, key);
     }
 
     // Pseudocode plan:
@@ -20,7 +26,7 @@ public class DocumentIntelligenceService : IDocumentIntelligenceService
 
     public async Task<ResumeDocument> ExtractResumeInsightsAsync(string blobUrl)
     {
-        string? sasToken = "post ur sas token here";
+        string? sasToken = "sp=r&st=2025-06-11T02:15:37Z&se=2025-06-30T10:15:37Z&spr=https&sv=2024-11-04&sr=c&sig=vLuLeuZJIV8XXdapSQqShQtUbhUznMsJ9X3jx9hLeDQ%3D";
         // Append SAS token if provided and not already present
         if (!string.IsNullOrWhiteSpace(sasToken) && !blobUrl.Contains("sig="))
         {
@@ -28,14 +34,14 @@ public class DocumentIntelligenceService : IDocumentIntelligenceService
             blobUrl = $"{blobUrl}{separator}{sasToken.TrimStart('?')}";
         }
 
-        var uri = new Uri(blobUrl);
+        var fileUri = new Uri(blobUrl);
 
         try
         {
             //Optionally: Pre - check if the blob exists and is accessible
             using (var httpClient = new HttpClient())
             {
-                var headRequest = new HttpRequestMessage(HttpMethod.Head, uri);
+                var headRequest = new HttpRequestMessage(HttpMethod.Head, fileUri);
                 var headResponse = await httpClient.SendAsync(headRequest);
                 if (!headResponse.IsSuccessStatusCode)
                 {
@@ -43,37 +49,70 @@ public class DocumentIntelligenceService : IDocumentIntelligenceService
                 }
             }
 
-            var operation = await _client.AnalyzeDocumentFromUriAsync(
-                WaitUntil.Completed,
-                "prebuilt-resume",
-                uri);
+            using var httpClient1 = new HttpClient();
+            var stream = await httpClient1.GetStreamAsync(fileUri);
 
-            var result = operation.Value;
+
+            using var memoryStream = new MemoryStream();
+            await stream.CopyToAsync(memoryStream);
+            memoryStream.Position = 0; // Reset position to the beginning
+
+
+            
+
+
+
+            await foreach (var model in _client1.GetDocumentModelsAsync())
+            {
+                Console.WriteLine($"Model ID: {model.ModelId}");
+            }
+
+
+
+            var operation = await _client.AnalyzeDocumentAsync(WaitUntil.Completed, "ResumesModel", memoryStream);
+
+
+
+
+            //AnalyzeDocumentOperation operation = await _client.AnalyzeDocumentFromUriAsync(WaitUntil.Completed, "prebuilt-resume", uri);
+            AnalyzeResult result = operation.Value;
+
+
+            //var operation = await _client.AnalyzeDocumentFromUriAsync(
+            //    WaitUntil.Completed,
+            //    "prebuilt-resume",
+            //    uri);
+
+            //var result = operation.Value;
 
             var doc = result.Documents.FirstOrDefault();
             if (doc == null)
                 throw new Exception("No document was returned by the analysis.");
 
-            string GetFieldContent(string fieldName) =>
-                doc.Fields.TryGetValue(fieldName, out var field) && !string.IsNullOrWhiteSpace(field?.Content)
-                    ? field.Content
-                    : throw new Exception($"Field '{fieldName}' not found or empty in the analyzed document.");
+            //string GetFieldContent(string fieldName) =>
+            //    doc.Fields.TryGetValue(fieldName, out var field) && !string.IsNullOrWhiteSpace(field?.Content)
+            //        ? field.Content
+            //        : throw new Exception($"Field '{fieldName}' not found or empty in the analyzed document.");
 
-            List<string> GetSkills()
+            string GetFieldContent(string fieldName) =>
+            doc.Fields.TryGetValue(fieldName, out var field) ? field?.Content : throw new Exception($"Field '{fieldName}' not found in the analyzed document.");
+                    
+                    
+            string GetSkills()
             {
-                if (doc.Fields.TryGetValue("skills", out var skillsField) && !string.IsNullOrWhiteSpace(skillsField?.Content))
-                    return skillsField.Content.Split(',').Select(s => s.Trim()).Where(s => !string.IsNullOrEmpty(s)).ToList();
-                throw new Exception("Field 'skills' not found or empty in the analyzed document.");
+                if (doc.Fields.TryGetValue("Skills", out var skillsField) && !string.IsNullOrWhiteSpace(skillsField?.Content))
+                    return string.Join(",", skillsField.Content.Split(',').Select(s => s.Trim()).Where(s => !string.IsNullOrEmpty(s)));
+                throw new Exception("Field 'Skills' not found or empty in the analyzed document.");
             }
 
             return new ResumeDocument
             {
                 Id = Guid.NewGuid().ToString(),
-                Name = GetFieldContent("name"),
-                Email = GetFieldContent("email"),
+                Name = GetFieldContent("Name"),
+                Email = string.Empty, //GetFieldContent("email"),
                 Skills = GetSkills(),
-                Education = GetFieldContent("education"),
-                Experience = GetFieldContent("workExperience"),
+                Education = GetFieldContent("Education"),
+                Experience = GetFieldContent("Experience"),
                 ResumeUrl = blobUrl
             };
         }

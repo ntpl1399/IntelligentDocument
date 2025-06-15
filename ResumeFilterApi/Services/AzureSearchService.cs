@@ -1,5 +1,6 @@
-﻿using Azure.Search.Documents;
-using Azure;
+﻿using Azure;
+using Azure.Search.Documents;
+using Azure.Search.Documents.Models;
 
 public class AzureSearchService : IAzureSearchService
 {
@@ -15,6 +16,20 @@ public class AzureSearchService : IAzureSearchService
 
     public async Task IndexResumeAsync(ResumeDocument resume)
     {
-        await _searchClient.UploadDocumentsAsync(new[] { resume });
+
+        var batch = IndexDocumentsBatch.Create(
+         IndexDocumentsAction.Upload(resume)
+         );
+
+        try
+        {
+            await _searchClient.IndexDocumentsAsync(batch);
+            Console.WriteLine($"Indexed resume: {resume.Name}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Failed to index resume: {ex.Message}");
+        }
+
     }
 }

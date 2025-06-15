@@ -13,8 +13,8 @@ public class ResumeDocument
     [SearchableField]
     public required string Email { get; set; }
 
-    [SearchableField(IsFilterable = true, IsFacetable = true)]
-    public required List<string> Skills { get; set; }
+    [SearchableField]
+    public required string Skills { get; set; }
 
     [SearchableField]
     public required string Education { get; set; }
