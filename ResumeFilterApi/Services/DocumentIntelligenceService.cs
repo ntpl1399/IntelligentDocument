@@ -8,10 +8,13 @@ public class DocumentIntelligenceService : IDocumentIntelligenceService
 
     private readonly DocumentModelAdministrationClient _client1;
 
+    private readonly string ? sasToken;
+
     public DocumentIntelligenceService(IConfiguration config)
     {
         var endpoint = new Uri(config["DocumentIntelligence:Endpoint"]);
         var key = new AzureKeyCredential(config["DocumentIntelligence:ApiKey"]);
+        sasToken = config["sasToken"];
 
         // Initialize the correct client types
         _client = new DocumentAnalysisClient(endpoint, key);
@@ -26,7 +29,8 @@ public class DocumentIntelligenceService : IDocumentIntelligenceService
 
     public async Task<ResumeDocument> ExtractResumeInsightsAsync(string blobUrl)
     {
-        string? sasToken = "sp=r&st=2025-06-11T02:15:37Z&se=2025-06-30T10:15:37Z&spr=https&sv=2024-11-04&sr=c&sig=vLuLeuZJIV8XXdapSQqShQtUbhUznMsJ9X3jx9hLeDQ%3D";
+        //string? sasToken = config["sasToken"];
+        //"sv=2024-11-04&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2025-11-29T18:34:15Z&st=2025-09-06T10:19:15Z&spr=https&sig=jSC9DGvY0cOg3JKGMPHOb4PRyKX9JxQS2%2FDAbDSWocs%3D";
         // Append SAS token if provided and not already present
         if (!string.IsNullOrWhiteSpace(sasToken) && !blobUrl.Contains("sig="))
         {

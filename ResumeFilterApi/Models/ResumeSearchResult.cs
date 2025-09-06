@@ -2,13 +2,13 @@
 {
     public class ResumeSearchResult
     {
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public List<string> Skills { get; set; }
-        public double? Experience { get; set; }
+        public string id { get; set; }
+        public string name { get; set; }
+        public string email { get; set; }
+        public string skills { get; set; }
+        public string experience { get; set; }
 
-        public string Education { get; set; }
+        public string education { get; set; }
 
         public string resumeUrl { get; set; }
     }
